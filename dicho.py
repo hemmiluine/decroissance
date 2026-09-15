@@ -96,10 +96,19 @@ with col2:
     st.metric("Amplitude (b - a)", f"{b_c - a_c:.5f}")
 
     # Condition du TVI
+    # Évaluation de la condition pour préparer le texte
+    if (fa_c - k_val) * (fm_c - k_val) <= 0:
+        produit_texte = "négatif"
+        intervalle_texte = f"[{a_c:.4f} ; {m_c:.4f}]"
+    else:
+        produit_texte = "positif"
+        intervalle_texte = f"[{m_c:.4f} ; {b_c:.4f}]"
+
+    # Affichage corrigé
     st.info(f"""
     **Vérification du signe :**
     * $f(a) - k = {fa_c - k_val:.3f}$
     * $f(m) - k = {fm_c - k_val:.3f}$
     
-    Le produit est **{'négatif' if (fa_c - k_val)*(fm_c - k_val) <= 0 else 'positif'}**, la solution est donc dans l'intervalle **[{a_c:.4f} ; {m_c:.4f} if (fa_c - k_val)*(fm_c - k_val) <= 0 else f'{m_c:.4f} ; {b_c:.4f}']**.
+    Le produit est **{produit_texte}**, la solution est donc dans l'intervalle **{intervalle_texte}**.
     """)
